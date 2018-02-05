@@ -1,0 +1,26 @@
+﻿@model CustomerModel
+@inject IEventPublisher eventPublisher
+
+<div asp-validation-summary="All"></div>
+<input asp-for="Id" type="hidden" />
+
+<div class="content">
+    <div class="form-horizontal">
+        <nop-tabs id="customer-edit">
+            <nop-tab asp-name="tab-info" asp-title="@T("Admin.Customers.Customers.Info")" asp-default="true">@await Html.PartialAsync("_CreateOrUpdate.Info", Model)</nop-tab>
+            @if (Model.Id > 0) {
+                <nop-tab asp-name="tab-activitylog" asp-title="@T("Admin.Customers.Customers.ActivityLog")">@await Html.PartialAsync("_CreateOrUpdate.ActivityLog", Model)</nop-tab>
+            }
+
+        </nop-tabs>
+    </div>
+</div>
+
+@{
+    //custom tabs
+    var eventMessage = new AdminTabStripCreated(this.Html, "customer-edit");
+    eventPublisher.Publish(eventMessage);
+    foreach (var eventBlock in eventMessage.BlocksToRender) {
+        @eventBlock
+    }
+}

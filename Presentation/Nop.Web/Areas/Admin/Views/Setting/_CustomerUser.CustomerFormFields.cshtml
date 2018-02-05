@@ -1,0 +1,100 @@
+﻿@model CustomerUserSettingsModel
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        $("#@Html.IdFor(model => model.CustomerSettings.PhoneEnabled)").click(toggleCustomerRequiredFormField);
+        $("#@Html.IdFor(model => model.CustomerSettings.NewsletterEnabled)").click(toggleNewsletterEnabledField);
+        $("#@Html.IdFor(model => model.CustomerSettings.HideNewsletterBlock)").click(toggleHideNewsletterBlock);
+
+        toggleCustomerRequiredFormField();
+        toggleNewsletterEnabledField();
+        toggleHideNewsletterBlock();
+    });
+
+
+    function toggleCustomerRequiredFormField() {
+       
+
+        if ($('#@Html.IdFor(model => model.CustomerSettings.PhoneEnabled)').is(':checked')) {
+            $('#pnlCustomerPhoneRequired').show();
+        } else {
+            $('#pnlCustomerPhoneRequired').hide();
+        }
+    }
+
+    function toggleNewsletterEnabledField() {
+        if ($('#@Html.IdFor(model => model.CustomerSettings.NewsletterEnabled)').is(':checked')) {
+            $('#pnlCustomerNewsletterTickedByDefault').show();
+        } else {
+            $('#pnlCustomerNewsletterTickedByDefault').hide();
+        }
+    }
+
+    function toggleHideNewsletterBlock() {
+        if ($('#@Html.IdFor(model => model.CustomerSettings.HideNewsletterBlock)').is(':checked')) {
+            $('#pnlNewsletterBlockAllowToUnsubscribe').hide();
+        }
+        else {
+            $('#pnlNewsletterBlockAllowToUnsubscribe').show();
+        }
+    }
+</script>
+
+<div class="panel-group">
+    @await Component.InvokeAsync("AdminWidget", new { widgetZone = "admin_customer_user_settings_customer_form_fields_top" })
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            @T("Admin.Configuration.Settings.CustomerUser.BlockTitle.DefaultFields")
+        </div>
+        <div class="panel-body">
+            <p>
+                <em>@T("Admin.Configuration.Settings.CustomerUser.CustomerFormFields.Description")</em>
+            </p>
+           
+            <div class="form-group">
+                <div class="col-md-3">
+                    <nop-label asp-for="CustomerSettings.PhoneEnabled" />
+                </div>
+                <div class="col-md-9">
+                    <nop-editor asp-for="CustomerSettings.PhoneEnabled" />
+                    <span asp-validation-for="CustomerSettings.PhoneEnabled"></span>
+                </div>
+            </div>
+            <nop-nested-setting asp-for="CustomerSettings.PhoneEnabled">
+                <div class="form-group" id="pnlCustomerPhoneRequired">
+                    <div class="col-md-3">
+                        <nop-label asp-for="CustomerSettings.PhoneRequired" />
+                    </div>
+                    <div class="col-md-9">
+                        <nop-editor asp-for="CustomerSettings.PhoneRequired" />
+                        <span asp-validation-for="CustomerSettings.PhoneRequired"></span>
+                    </div>
+                </div>
+            </nop-nested-setting>
+
+            <div class="form-group">
+                <div class="col-md-3">
+                    <nop-label asp-for="CustomerSettings.NewsletterEnabled" />
+                </div>
+                <div class="col-md-9">
+                    <nop-editor asp-for="CustomerSettings.NewsletterEnabled" />
+                    <span asp-validation-for="CustomerSettings.NewsletterEnabled"></span>
+                </div>
+            </div>
+            <nop-nested-setting asp-for="CustomerSettings.NewsletterEnabled">
+                <div class="form-group" id="pnlCustomerNewsletterTickedByDefault">
+                    <div class="col-md-3">
+                        <nop-label asp-for="CustomerSettings.NewsletterTickedByDefault" />
+                    </div>
+                    <div class="col-md-9">
+                        <nop-editor asp-for="CustomerSettings.NewsletterTickedByDefault" />
+                        <span asp-validation-for="CustomerSettings.NewsletterTickedByDefault"></span>
+                    </div>
+                </div>
+            </nop-nested-setting>
+        </div>
+    </div>
+    @*render custom customer attributes*@
+    @await Html.PartialAsync("../CustomerAttribute/ListBlock.cshtml")
+    @await Component.InvokeAsync("AdminWidget", new { widgetZone = "admin_customer_user_settings_customer_form_fields_bottom" })
+</div>

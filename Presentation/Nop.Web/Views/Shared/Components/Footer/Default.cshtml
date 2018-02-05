@@ -1,0 +1,14 @@
+﻿@model FooterModel
+
+<div class="footer">
+    <div class="footer-lower">
+        @if (!Model.HidePoweredByNopCommerce)
+        {
+            <div class="footer-powered-by">
+                Powered by <a href="#">nopCommerce</a>
+            </div>
+        }
+        @await Component.InvokeAsync("StoreThemeSelector")
+    </div>
+    @await Component.InvokeAsync("Widget", new { widgetZone = "footer" })
+</div>

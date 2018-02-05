@@ -1,0 +1,727 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>net461</TargetFramework>
+    <Copyright>Copyright © Nop Solutions, Ltd</Copyright>
+    <Company>Nop Solutions, Ltd</Company>
+    <Authors>Nop Solutions, Ltd</Authors>
+    <Version>4.0.0.0</Version>
+    <Description>Nop.Web is also an MVC web application project, a presentation layer for public store and admin area.</Description>
+    <PackageLicenseUrl>http://www.nopcommerce.com/licensev3.aspx</PackageLicenseUrl>
+    <PackageProjectUrl>http://www.nopcommerce.com/</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/nopSolutions/nopCommerce</RepositoryUrl>
+    <RepositoryType>Git</RepositoryType>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.Extensions.FileProviders.Abstractions" Version="2.0.0" />
+    <PackageReference Include="Microsoft.Extensions.FileProviders.Composite" Version="2.0.0" />
+    <PackageReference Include="Microsoft.Extensions.FileProviders.Embedded" Version="2.0.0" />
+    <PackageReference Include="Microsoft.Extensions.FileProviders.Physical" Version="2.0.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\Libraries\Nop.Core\Nop.Core.csproj" />
+    <ProjectReference Include="..\..\Libraries\Nop.Data\Nop.Data.csproj" />
+    <ProjectReference Include="..\..\Libraries\Nop.Services\Nop.Services.csproj" />
+    <ProjectReference Include="..\Nop.Web.Framework\Nop.Web.Framework.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <!-- We copy the entire \App_Data directory. But we ignore JSON files and data protection keys  -->
+    <Content Include="App_Data\**" CopyToPublishDirectory="PreserveNewest" Exclude="App_Data\*.json" />
+    <Content Update="App_Data\*.json" CopyToPublishDirectory="Never" />
+    <Content Update="App_Data\DataProtectionKeys\*.xml" CopyToPublishDirectory="Never" />
+    <Compile Remove="Areas\Admin\Models\Affiliates\**" />
+    <Compile Remove="Areas\Admin\Models\Blogs\**" />
+    <Compile Remove="Areas\Admin\Models\Catalog\**" />
+    <Compile Remove="Areas\Admin\Models\Directory\**" />
+    <Compile Remove="Areas\Admin\Models\Discounts\**" />
+    <Compile Remove="Areas\Admin\Models\Forums\**" />
+    <Compile Remove="Areas\Admin\Models\Orders\**" />
+    <Compile Remove="Areas\Admin\Models\Payments\**" />
+    <Compile Remove="Areas\Admin\Models\Polls\**" />
+    <Compile Remove="Areas\Admin\Models\Shipping\**" />
+    <Compile Remove="Areas\Admin\Models\ShoppingCart\**" />
+    <Compile Remove="Areas\Admin\Models\Tax\**" />
+    <Compile Remove="Areas\Admin\Models\Templates\**" />
+    <Compile Remove="Areas\Admin\Models\Topics\**" />
+    <Compile Remove="Areas\Admin\Models\Vendors\**" />
+    <Compile Remove="Areas\Admin\Validators\Affiliates\**" />
+    <Compile Remove="Areas\Admin\Validators\Blogs\**" />
+    <Compile Remove="Areas\Admin\Validators\Catalog\**" />
+    <Compile Remove="Areas\Admin\Validators\Common\**" />
+    <Compile Remove="Areas\Admin\Validators\Directory\**" />
+    <Compile Remove="Areas\Admin\Validators\Discounts\**" />
+    <Compile Remove="Areas\Admin\Validators\Forums\**" />
+    <Compile Remove="Areas\Admin\Validators\Orders\**" />
+    <Compile Remove="Areas\Admin\Validators\Polls\**" />
+    <Compile Remove="Areas\Admin\Validators\Shipping\**" />
+    <Compile Remove="Areas\Admin\Validators\Tax\**" />
+    <Compile Remove="Areas\Admin\Validators\Templates\**" />
+    <Compile Remove="Areas\Admin\Validators\Vendors\**" />
+    <Compile Remove="Areas\Admin\Views\AddressAttribute\**" />
+    <Compile Remove="Areas\Admin\Views\Affiliate\**" />
+    <Compile Remove="Areas\Admin\Views\Blog\**" />
+    <Compile Remove="Areas\Admin\Views\Category\**" />
+    <Compile Remove="Areas\Admin\Views\CheckoutAttribute\**" />
+    <Compile Remove="Areas\Admin\Views\Country\**" />
+    <Compile Remove="Areas\Admin\Views\Currency\**" />
+    <Compile Remove="Areas\Admin\Views\Discount\**" />
+    <Compile Remove="Areas\Admin\Views\Forum\**" />
+    <Compile Remove="Areas\Admin\Views\GiftCard\**" />
+    <Compile Remove="Areas\Admin\Views\Manufacturer\**" />
+    <Compile Remove="Areas\Admin\Views\Measure\**" />
+    <Compile Remove="Areas\Admin\Views\Order\**" />
+    <Compile Remove="Areas\Admin\Views\Payment\**" />
+    <Compile Remove="Areas\Admin\Views\Poll\**" />
+    <Compile Remove="Areas\Admin\Views\ProductAttribute\**" />
+    <Compile Remove="Areas\Admin\Views\ProductReview\**" />
+    <Compile Remove="Areas\Admin\Views\Product\**" />
+    <Compile Remove="Areas\Admin\Views\RecurringPayment\**" />
+    <Compile Remove="Areas\Admin\Views\ReturnRequest\**" />
+    <Compile Remove="Areas\Admin\Views\Shipping\**" />
+    <Compile Remove="Areas\Admin\Views\ShoppingCart\**" />
+    <Compile Remove="Areas\Admin\Views\SpecificationAttribute\**" />
+    <Compile Remove="Areas\Admin\Views\Tax\**" />
+    <Compile Remove="Areas\Admin\Views\Topic\**" />
+    <Compile Remove="Areas\Admin\Views\Vendor\**" />
+    <Compile Remove="Models\Blogs\**" />
+    <Compile Remove="Models\Boards\**" />
+    <Compile Remove="Models\Catalog\**" />
+    <Compile Remove="Models\Checkout\**" />
+    <Compile Remove="Models\Directory\**" />
+    <Compile Remove="Models\Order\**" />
+    <Compile Remove="Models\Polls\**" />
+    <Compile Remove="Models\PrivateMessages\**" />
+    <Compile Remove="Models\ShoppingCart\**" />
+    <Compile Remove="Models\Topics\**" />
+    <Compile Remove="Models\Vendors\**" />
+
+    <Compile Remove="Plugins\**" />
+
+    <Compile Remove="Validators\Blogs\**" />
+
+    <Compile Remove="Validators\Boards\**" />
+
+    <Compile Remove="Validators\Catalog\**" />
+
+    <Compile Remove="Validators\Checkout\**" />
+
+    <Compile Remove="Validators\PrivateMessages\**" />
+
+    <Compile Remove="Validators\ShoppingCart\**" />
+
+    <Compile Remove="Validators\Vendors\**" />
+
+    <Compile Remove="Views\BackInStockSubscription\**" />
+
+    <Compile Remove="Views\Blog\**" />
+
+    <Compile Remove="Views\Boards\**" />
+
+    <Compile Remove="Views\Catalog\**" />
+
+    <Compile Remove="Views\Checkout\**" />
+
+    <Compile Remove="Views\Order\**" />
+
+    <Compile Remove="Views\PrivateMessages\**" />
+
+    <Compile Remove="Views\Product\**" />
+
+    <Compile Remove="Views\Profile\**" />
+
+    <Compile Remove="Views\ReturnRequest\**" />
+
+    <Compile Remove="Views\ShoppingCart\**" />
+
+    <Compile Remove="Views\Topic\**" />
+
+    <Compile Remove="Views\Vendor\**" />
+
+    <Content Remove="Areas\Admin\Models\Affiliates\**" />
+
+    <Content Remove="Areas\Admin\Models\Blogs\**" />
+
+    <Content Remove="Areas\Admin\Models\Catalog\**" />
+
+    <Content Remove="Areas\Admin\Models\Directory\**" />
+
+    <Content Remove="Areas\Admin\Models\Discounts\**" />
+
+    <Content Remove="Areas\Admin\Models\Forums\**" />
+
+    <Content Remove="Areas\Admin\Models\Orders\**" />
+
+    <Content Remove="Areas\Admin\Models\Payments\**" />
+
+    <Content Remove="Areas\Admin\Models\Polls\**" />
+
+    <Content Remove="Areas\Admin\Models\Shipping\**" />
+
+    <Content Remove="Areas\Admin\Models\ShoppingCart\**" />
+
+    <Content Remove="Areas\Admin\Models\Tax\**" />
+
+    <Content Remove="Areas\Admin\Models\Templates\**" />
+
+    <Content Remove="Areas\Admin\Models\Topics\**" />
+
+    <Content Remove="Areas\Admin\Models\Vendors\**" />
+
+    <Content Remove="Areas\Admin\Validators\Affiliates\**" />
+
+    <Content Remove="Areas\Admin\Validators\Blogs\**" />
+
+    <Content Remove="Areas\Admin\Validators\Catalog\**" />
+
+    <Content Remove="Areas\Admin\Validators\Common\**" />
+
+    <Content Remove="Areas\Admin\Validators\Directory\**" />
+
+    <Content Remove="Areas\Admin\Validators\Discounts\**" />
+
+    <Content Remove="Areas\Admin\Validators\Forums\**" />
+
+    <Content Remove="Areas\Admin\Validators\Orders\**" />
+
+    <Content Remove="Areas\Admin\Validators\Polls\**" />
+
+    <Content Remove="Areas\Admin\Validators\Shipping\**" />
+
+    <Content Remove="Areas\Admin\Validators\Tax\**" />
+
+    <Content Remove="Areas\Admin\Validators\Templates\**" />
+
+    <Content Remove="Areas\Admin\Validators\Vendors\**" />
+
+    <Content Remove="Areas\Admin\Views\AddressAttribute\**" />
+
+    <Content Remove="Areas\Admin\Views\Affiliate\**" />
+
+    <Content Remove="Areas\Admin\Views\Blog\**" />
+
+    <Content Remove="Areas\Admin\Views\Category\**" />
+
+    <Content Remove="Areas\Admin\Views\CheckoutAttribute\**" />
+
+    <Content Remove="Areas\Admin\Views\Country\**" />
+
+    <Content Remove="Areas\Admin\Views\Currency\**" />
+
+    <Content Remove="Areas\Admin\Views\Discount\**" />
+
+    <Content Remove="Areas\Admin\Views\Forum\**" />
+
+    <Content Remove="Areas\Admin\Views\GiftCard\**" />
+
+    <Content Remove="Areas\Admin\Views\Manufacturer\**" />
+
+    <Content Remove="Areas\Admin\Views\Measure\**" />
+
+    <Content Remove="Areas\Admin\Views\Order\**" />
+
+    <Content Remove="Areas\Admin\Views\Payment\**" />
+
+    <Content Remove="Areas\Admin\Views\Poll\**" />
+
+    <Content Remove="Areas\Admin\Views\ProductAttribute\**" />
+
+    <Content Remove="Areas\Admin\Views\ProductReview\**" />
+
+    <Content Remove="Areas\Admin\Views\Product\**" />
+
+    <Content Remove="Areas\Admin\Views\RecurringPayment\**" />
+
+    <Content Remove="Areas\Admin\Views\ReturnRequest\**" />
+
+    <Content Remove="Areas\Admin\Views\Shipping\**" />
+
+    <Content Remove="Areas\Admin\Views\ShoppingCart\**" />
+
+    <Content Remove="Areas\Admin\Views\SpecificationAttribute\**" />
+
+    <Content Remove="Areas\Admin\Views\Tax\**" />
+
+    <Content Remove="Areas\Admin\Views\Topic\**" />
+
+    <Content Remove="Areas\Admin\Views\Vendor\**" />
+
+    <Content Remove="Models\Blogs\**" />
+
+    <Content Remove="Models\Boards\**" />
+
+    <Content Remove="Models\Catalog\**" />
+
+    <Content Remove="Models\Checkout\**" />
+
+    <Content Remove="Models\Directory\**" />
+
+    <Content Remove="Models\Order\**" />
+
+    <Content Remove="Models\Polls\**" />
+
+    <Content Remove="Models\PrivateMessages\**" />
+
+    <Content Remove="Models\ShoppingCart\**" />
+
+    <Content Remove="Models\Topics\**" />
+
+    <Content Remove="Models\Vendors\**" />
+
+    <Content Remove="Validators\Blogs\**" />
+
+    <Content Remove="Validators\Boards\**" />
+
+    <Content Remove="Validators\Catalog\**" />
+
+    <Content Remove="Validators\Checkout\**" />
+
+    <Content Remove="Validators\PrivateMessages\**" />
+
+    <Content Remove="Validators\ShoppingCart\**" />
+
+    <Content Remove="Validators\Vendors\**" />
+
+    <Content Remove="Views\BackInStockSubscription\**" />
+
+    <Content Remove="Views\Blog\**" />
+
+    <Content Remove="Views\Boards\**" />
+
+    <Content Remove="Views\Catalog\**" />
+
+    <Content Remove="Views\Checkout\**" />
+
+    <Content Remove="Views\Order\**" />
+
+    <Content Remove="Views\PrivateMessages\**" />
+
+    <Content Remove="Views\Product\**" />
+
+    <Content Remove="Views\Profile\**" />
+
+    <Content Remove="Views\ReturnRequest\**" />
+
+    <Content Remove="Views\ShoppingCart\**" />
+
+    <Content Remove="Views\Topic\**" />
+
+    <Content Remove="Views\Vendor\**" />
+
+    <EmbeddedResource Remove="Areas\Admin\Models\Affiliates\**" />
+
+    <EmbeddedResource Remove="Areas\Admin\Models\Blogs\**" />
+
+    <EmbeddedResource Remove="Areas\Admin\Models\Catalog\**" />
+
+    <EmbeddedResource Remove="Areas\Admin\Models\Directory\**" />
+
+    <EmbeddedResource Remove="Areas\Admin\Models\Discounts\**" />
+
+    <EmbeddedResource Remove="Areas\Admin\Models\Forums\**" />
+
+    <EmbeddedResource Remove="Areas\Admin\Models\Orders\**" />
+
+    <EmbeddedResource Remove="Areas\Admin\Models\Payments\**" />
+
+    <EmbeddedResource Remove="Areas\Admin\Models\Polls\**" />
+
+    <EmbeddedResource Remove="Areas\Admin\Models\Shipping\**" />
+
+    <EmbeddedResource Remove="Areas\Admin\Models\ShoppingCart\**" />
+
+    <EmbeddedResource Remove="Areas\Admin\Models\Tax\**" />
+
+    <EmbeddedResource Remove="Areas\Admin\Models\Templates\**" />
+
+    <EmbeddedResource Remove="Areas\Admin\Models\Topics\**" />
+
+    <EmbeddedResource Remove="Areas\Admin\Models\Vendors\**" />
+
+    <EmbeddedResource Remove="Areas\Admin\Validators\Affiliates\**" />
+
+    <EmbeddedResource Remove="Areas\Admin\Validators\Blogs\**" />
+
+    <EmbeddedResource Remove="Areas\Admin\Validators\Catalog\**" />
+
+    <EmbeddedResource Remove="Areas\Admin\Validators\Common\**" />
+
+    <EmbeddedResource Remove="Areas\Admin\Validators\Directory\**" />
+
+    <EmbeddedResource Remove="Areas\Admin\Validators\Discounts\**" />
+
+    <EmbeddedResource Remove="Areas\Admin\Validators\Forums\**" />
+
+    <EmbeddedResource Remove="Areas\Admin\Validators\Orders\**" />
+
+    <EmbeddedResource Remove="Areas\Admin\Validators\Polls\**" />
+
+    <EmbeddedResource Remove="Areas\Admin\Validators\Shipping\**" />
+
+    <EmbeddedResource Remove="Areas\Admin\Validators\Tax\**" />
+
+    <EmbeddedResource Remove="Areas\Admin\Validators\Templates\**" />
+
+    <EmbeddedResource Remove="Areas\Admin\Validators\Vendors\**" />
+
+    <EmbeddedResource Remove="Areas\Admin\Views\AddressAttribute\**" />
+
+    <EmbeddedResource Remove="Areas\Admin\Views\Affiliate\**" />
+
+    <EmbeddedResource Remove="Areas\Admin\Views\Blog\**" />
+
+    <EmbeddedResource Remove="Areas\Admin\Views\Category\**" />
+
+    <EmbeddedResource Remove="Areas\Admin\Views\CheckoutAttribute\**" />
+
+    <EmbeddedResource Remove="Areas\Admin\Views\Country\**" />
+
+    <EmbeddedResource Remove="Areas\Admin\Views\Currency\**" />
+
+    <EmbeddedResource Remove="Areas\Admin\Views\Discount\**" />
+
+    <EmbeddedResource Remove="Areas\Admin\Views\Forum\**" />
+
+    <EmbeddedResource Remove="Areas\Admin\Views\GiftCard\**" />
+
+    <EmbeddedResource Remove="Areas\Admin\Views\Manufacturer\**" />
+
+    <EmbeddedResource Remove="Areas\Admin\Views\Measure\**" />
+
+    <EmbeddedResource Remove="Areas\Admin\Views\Order\**" />
+
+    <EmbeddedResource Remove="Areas\Admin\Views\Payment\**" />
+
+    <EmbeddedResource Remove="Areas\Admin\Views\Poll\**" />
+
+    <EmbeddedResource Remove="Areas\Admin\Views\ProductAttribute\**" />
+
+    <EmbeddedResource Remove="Areas\Admin\Views\ProductReview\**" />
+
+    <EmbeddedResource Remove="Areas\Admin\Views\Product\**" />
+
+    <EmbeddedResource Remove="Areas\Admin\Views\RecurringPayment\**" />
+
+    <EmbeddedResource Remove="Areas\Admin\Views\ReturnRequest\**" />
+
+    <EmbeddedResource Remove="Areas\Admin\Views\Shipping\**" />
+
+    <EmbeddedResource Remove="Areas\Admin\Views\ShoppingCart\**" />
+
+    <EmbeddedResource Remove="Areas\Admin\Views\SpecificationAttribute\**" />
+
+    <EmbeddedResource Remove="Areas\Admin\Views\Tax\**" />
+
+    <EmbeddedResource Remove="Areas\Admin\Views\Topic\**" />
+
+    <EmbeddedResource Remove="Areas\Admin\Views\Vendor\**" />
+
+    <EmbeddedResource Remove="Models\Blogs\**" />
+
+    <EmbeddedResource Remove="Models\Boards\**" />
+
+    <EmbeddedResource Remove="Models\Catalog\**" />
+
+    <EmbeddedResource Remove="Models\Checkout\**" />
+
+    <EmbeddedResource Remove="Models\Directory\**" />
+
+    <EmbeddedResource Remove="Models\Order\**" />
+
+    <EmbeddedResource Remove="Models\Polls\**" />
+
+    <EmbeddedResource Remove="Models\PrivateMessages\**" />
+
+    <EmbeddedResource Remove="Models\ShoppingCart\**" />
+
+    <EmbeddedResource Remove="Models\Topics\**" />
+
+    <EmbeddedResource Remove="Models\Vendors\**" />
+    <EmbeddedResource Remove="Plugins\**" />
+    <EmbeddedResource Remove="Validators\Blogs\**" />
+    <EmbeddedResource Remove="Validators\Boards\**" />
+    <EmbeddedResource Remove="Validators\Catalog\**" />
+    <EmbeddedResource Remove="Validators\Checkout\**" />
+    <EmbeddedResource Remove="Validators\PrivateMessages\**" />
+    <EmbeddedResource Remove="Validators\ShoppingCart\**" />
+    <EmbeddedResource Remove="Validators\Vendors\**" />
+    <EmbeddedResource Remove="Views\BackInStockSubscription\**" />
+    <EmbeddedResource Remove="Views\Blog\**" />
+    <EmbeddedResource Remove="Views\Boards\**" />
+    <EmbeddedResource Remove="Views\Catalog\**" />
+    <EmbeddedResource Remove="Views\Checkout\**" />
+    <EmbeddedResource Remove="Views\Order\**" />
+    <EmbeddedResource Remove="Views\PrivateMessages\**" />
+    <EmbeddedResource Remove="Views\Product\**" />
+    <EmbeddedResource Remove="Views\Profile\**" />
+    <EmbeddedResource Remove="Views\ReturnRequest\**" />
+    <EmbeddedResource Remove="Views\ShoppingCart\**" />
+    <EmbeddedResource Remove="Views\Topic\**" />
+    <EmbeddedResource Remove="Views\Vendor\**" />
+    <None Remove="Areas\Admin\Models\Affiliates\**" />
+    <None Remove="Areas\Admin\Models\Blogs\**" />
+    <None Remove="Areas\Admin\Models\Catalog\**" />
+    <None Remove="Areas\Admin\Models\Directory\**" />
+    <None Remove="Areas\Admin\Models\Discounts\**" />
+    <None Remove="Areas\Admin\Models\Forums\**" />
+    <None Remove="Areas\Admin\Models\Orders\**" />
+    <None Remove="Areas\Admin\Models\Payments\**" />
+    <None Remove="Areas\Admin\Models\Polls\**" />
+    <None Remove="Areas\Admin\Models\Shipping\**" />
+    <None Remove="Areas\Admin\Models\ShoppingCart\**" />
+    <None Remove="Areas\Admin\Models\Tax\**" />
+    <None Remove="Areas\Admin\Models\Templates\**" />
+    <None Remove="Areas\Admin\Models\Topics\**" />
+    <None Remove="Areas\Admin\Models\Vendors\**" />
+    <None Remove="Areas\Admin\Validators\Affiliates\**" />
+    <None Remove="Areas\Admin\Validators\Blogs\**" />
+    <None Remove="Areas\Admin\Validators\Catalog\**" />
+    <None Remove="Areas\Admin\Validators\Common\**" />
+    <None Remove="Areas\Admin\Validators\Directory\**" />
+    <None Remove="Areas\Admin\Validators\Discounts\**" />
+    <None Remove="Areas\Admin\Validators\Forums\**" />
+    <None Remove="Areas\Admin\Validators\Orders\**" />
+    <None Remove="Areas\Admin\Validators\Polls\**" />
+    <None Remove="Areas\Admin\Validators\Shipping\**" />
+    <None Remove="Areas\Admin\Validators\Tax\**" />
+    <None Remove="Areas\Admin\Validators\Templates\**" />
+    <None Remove="Areas\Admin\Validators\Vendors\**" />
+    <None Remove="Areas\Admin\Views\AddressAttribute\**" />
+    <None Remove="Areas\Admin\Views\Affiliate\**" />
+    <None Remove="Areas\Admin\Views\Blog\**" />
+    <None Remove="Areas\Admin\Views\Category\**" />
+    <None Remove="Areas\Admin\Views\CheckoutAttribute\**" />
+    <None Remove="Areas\Admin\Views\Country\**" />
+    <None Remove="Areas\Admin\Views\Currency\**" />
+    <None Remove="Areas\Admin\Views\Discount\**" />
+    <None Remove="Areas\Admin\Views\Forum\**" />
+    <None Remove="Areas\Admin\Views\GiftCard\**" />
+    <None Remove="Areas\Admin\Views\Manufacturer\**" />
+    <None Remove="Areas\Admin\Views\Measure\**" />
+    <None Remove="Areas\Admin\Views\Order\**" />
+    <None Remove="Areas\Admin\Views\Payment\**" />
+    <None Remove="Areas\Admin\Views\Poll\**" />
+    <None Remove="Areas\Admin\Views\ProductAttribute\**" />
+    <None Remove="Areas\Admin\Views\ProductReview\**" />
+    <None Remove="Areas\Admin\Views\Product\**" />
+    <None Remove="Areas\Admin\Views\RecurringPayment\**" />
+    <None Remove="Areas\Admin\Views\ReturnRequest\**" />
+    <None Remove="Areas\Admin\Views\Shipping\**" />
+    <None Remove="Areas\Admin\Views\ShoppingCart\**" />
+    <None Remove="Areas\Admin\Views\SpecificationAttribute\**" />
+    <None Remove="Areas\Admin\Views\Tax\**" />
+    <None Remove="Areas\Admin\Views\Topic\**" />
+    <None Remove="Areas\Admin\Views\Vendor\**" />
+    <None Remove="Models\Blogs\**" />
+    <None Remove="Models\Boards\**" />
+    <None Remove="Models\Catalog\**" />
+    <None Remove="Models\Checkout\**" />
+    <None Remove="Models\Directory\**" />
+    <None Remove="Models\Order\**" />
+    <None Remove="Models\Polls\**" />
+    <None Remove="Models\PrivateMessages\**" />
+    <None Remove="Models\ShoppingCart\**" />
+    <None Remove="Models\Topics\**" />
+    <None Remove="Models\Vendors\**" />
+    <None Remove="Plugins\**" />
+    <None Remove="Validators\Blogs\**" />
+    <None Remove="Validators\Boards\**" />
+    <None Remove="Validators\Catalog\**" />
+    <None Remove="Validators\Checkout\**" />
+    <None Remove="Validators\PrivateMessages\**" />
+    <None Remove="Validators\ShoppingCart\**" />
+    <None Remove="Validators\Vendors\**" />
+    <None Remove="Views\BackInStockSubscription\**" />
+    <None Remove="Views\Blog\**" />
+    <None Remove="Views\Boards\**" />
+    <None Remove="Views\Catalog\**" />
+    <None Remove="Views\Checkout\**" />
+    <None Remove="Views\Order\**" />
+    <None Remove="Views\PrivateMessages\**" />
+    <None Remove="Views\Product\**" />
+    <None Remove="Views\Profile\**" />
+    <None Remove="Views\ReturnRequest\**" />
+    <None Remove="Views\ShoppingCart\**" />
+    <None Remove="Views\Topic\**" />
+    <None Remove="Views\Vendor\**" />
+
+    <!-- We copy the entire \Plugins and \Themes directories.
+	    But we ignore cshtml and JSON files to avoid "Duplicate 'Content' items were included" error during publishing.
+	    We also can use "CheckForDuplicateItemsContinueOnError" as per https://github.com/dotnet/sdk/blob/master/src/Tasks/Microsoft.NET.Build.Tasks/build/Microsoft.NET.Sdk.DefaultItems.targets -->
+    <Content Include="Plugins\**" CopyToPublishDirectory="PreserveNewest" Exclude="Plugins\**\*.config;Plugins\**\*.cshtml;Plugins\**\*.json" />
+    <Content Include="Themes\**" CopyToPublishDirectory="PreserveNewest" Exclude="Themes\**\*.config;Themes\**\*.cshtml;Themes\**\*.json" />
+
+    <!-- We copy the \Logs directory -->
+    <Content Include="Logs\**" CopyToPublishDirectory="PreserveNewest" />
+    <Compile Remove="Areas\Admin\Controllers\AddressAttributeController.cs" />
+    <Compile Remove="Areas\Admin\Controllers\AffiliateController.cs" />
+    <Compile Remove="Areas\Admin\Controllers\BlogController.cs" />
+    <Compile Remove="Areas\Admin\Controllers\CategoryController.cs" />
+    <Compile Remove="Areas\Admin\Controllers\CheckoutAttributeController.cs" />
+    <Compile Remove="Areas\Admin\Controllers\CountryController.cs" />
+    <Compile Remove="Areas\Admin\Controllers\CurrencyController.cs" />
+    <Compile Remove="Areas\Admin\Controllers\DiscountController.cs" />
+    <Compile Remove="Areas\Admin\Controllers\ForumController.cs" />
+    <Compile Remove="Areas\Admin\Controllers\GiftCardController.cs" />
+    <Compile Remove="Areas\Admin\Controllers\JbimagesController.cs" />
+    <Compile Remove="Areas\Admin\Controllers\ManufacturerController.cs" />
+    <Compile Remove="Areas\Admin\Controllers\MeasureController.cs" />
+    <Compile Remove="Areas\Admin\Controllers\OrderController.cs" />
+    <Compile Remove="Areas\Admin\Controllers\PaymentController.cs" />
+    <Compile Remove="Areas\Admin\Controllers\PollController.cs" />
+    <Compile Remove="Areas\Admin\Controllers\ProductAttributeController.cs" />
+    <Compile Remove="Areas\Admin\Controllers\ProductController.cs" />
+    <Compile Remove="Areas\Admin\Controllers\ProductReviewController.cs" />
+    <Compile Remove="Areas\Admin\Controllers\RecurringPaymentController.cs" />
+    <Compile Remove="Areas\Admin\Controllers\ReturnRequestController.cs" />
+    <Compile Remove="Areas\Admin\Controllers\RoxyFilemanController.cs" />
+    <Compile Remove="Areas\Admin\Controllers\ShippingController.cs" />
+    <Compile Remove="Areas\Admin\Controllers\ShoppingCartController.cs" />
+    <Compile Remove="Areas\Admin\Controllers\SpecificationAttributeController.cs" />
+    <Compile Remove="Areas\Admin\Controllers\TaxController.cs" />
+    <Compile Remove="Areas\Admin\Controllers\TemplateController.cs" />
+    <Compile Remove="Areas\Admin\Controllers\TopicController.cs" />
+    <Compile Remove="Areas\Admin\Controllers\VendorController.cs" />
+    <Compile Remove="Areas\Admin\Models\Common\AddressAttributeModel.cs" />
+    <Compile Remove="Areas\Admin\Models\Common\AddressAttributeValueModel.cs" />
+    <Compile Remove="Areas\Admin\Models\Common\AddressModel.cs" />
+    <Compile Remove="Areas\Admin\Models\Common\MaintenanceModel.cs" />
+    <Compile Remove="Areas\Admin\Models\Common\SearchTermReportLineModel.cs" />
+    <Compile Remove="Areas\Admin\Models\Customers\CustomerAddressModel.cs" />
+    <Compile Remove="Areas\Admin\Models\Settings\BlogSettingsModel.cs" />
+    <Compile Remove="Areas\Admin\Models\Settings\CatalogSettingsModel.cs" />
+    <Compile Remove="Areas\Admin\Models\Settings\ForumSettingsModel.cs" />
+    <Compile Remove="Areas\Admin\Models\Settings\OrderSettingsModel.cs" />
+    <Compile Remove="Areas\Admin\Models\Settings\ProductEditorSettingsModel.cs" />
+    <Compile Remove="Areas\Admin\Models\Settings\ReturnRequestActionModel.cs" />
+    <Compile Remove="Areas\Admin\Models\Settings\ReturnRequestReasonModel.cs" />
+    <Compile Remove="Areas\Admin\Models\Settings\RewardPointsSettingsModel.cs" />
+    <Compile Remove="Areas\Admin\Models\Settings\ShippingSettingsModel.cs" />
+    <Compile Remove="Areas\Admin\Models\Settings\ShoppingCartSettingsModel.cs" />
+    <Compile Remove="Areas\Admin\Models\Settings\TaxSettingsModel.cs" />
+    <Compile Remove="Areas\Admin\Models\Settings\VendorSettingsModel.cs" />
+    <Compile Remove="Areas\Admin\Validators\Customers\CustomerAddressValidator.cs" />
+    <Compile Remove="Areas\Admin\Validators\Settings\ReturnRequestActionValidator.cs" />
+    <Compile Remove="Areas\Admin\Validators\Settings\ReturnRequestReasonValidator.cs" />
+    <Compile Remove="Components\BlogMonths.cs" />
+    <Compile Remove="Components\BlogRssHeaderLink.cs" />
+    <Compile Remove="Components\BlogTags.cs" />
+    <Compile Remove="Components\CategoryNavigation.cs" />
+    <Compile Remove="Components\CheckoutProgress.cs" />
+    <Compile Remove="Components\CrossSellProducts.cs" />
+    <Compile Remove="Components\CurrencySelector.cs" />
+    <Compile Remove="Components\EstimateShipping.cs" />
+    <Compile Remove="Components\FlyoutShoppingCart.cs" />
+    <Compile Remove="Components\ForumActiveDiscussionsSmall.cs" />
+    <Compile Remove="Components\ForumBreadcrumb.cs" />
+    <Compile Remove="Components\ForumLastPost.cs" />
+    <Compile Remove="Components\HomepageBestSellers.cs" />
+    <Compile Remove="Components\HomepageCategories.cs" />
+    <Compile Remove="Components\HomepagePolls.cs" />
+    <Compile Remove="Components\HomepageProducts.cs" />
+    <Compile Remove="Components\ManufacturerNavigation.cs" />
+    <Compile Remove="Components\OrderSummary.cs" />
+    <Compile Remove="Components\OrderTotals.cs" />
+    <Compile Remove="Components\PollBlock.cs" />
+    <Compile Remove="Components\PopularProductTags.cs" />
+    <Compile Remove="Components\PrivateMessagesInbox.cs" />
+    <Compile Remove="Components\PrivateMessagesSentItems.cs" />
+    <Compile Remove="Components\ProductsAlsoPurchased.cs" />
+    <Compile Remove="Components\ProfileInfo.cs" />
+    <Compile Remove="Components\ProfilePosts.cs" />
+    <Compile Remove="Components\RecentlyViewedProductsBlock.cs" />
+    <Compile Remove="Components\RelatedProducts.cs" />
+    <Compile Remove="Components\SearchBox.cs" />
+    <Compile Remove="Components\SelectedCheckoutAttributes.cs" />
+    <Compile Remove="Components\TaxTypeSelector.cs" />
+    <Compile Remove="Components\TopicBlock.cs" />
+    <Compile Remove="Components\TopMenu.cs" />
+    <Compile Remove="Components\VendorNavigation.cs" />
+    <Compile Remove="Controllers\BackInStockSubscriptionController.cs" />
+    <Compile Remove="Controllers\BackwardCompatibility1XController.cs" />
+    <Compile Remove="Controllers\BackwardCompatibility2XController.cs" />
+    <Compile Remove="Controllers\BlogController.cs" />
+    <Compile Remove="Controllers\BoardsController.cs" />
+    <Compile Remove="Controllers\CatalogController.cs" />
+    <Compile Remove="Controllers\CheckoutController.cs" />
+    <Compile Remove="Controllers\CountryController.cs" />
+    <Compile Remove="Controllers\OrderController.cs" />
+    <Compile Remove="Controllers\PollController.cs" />
+    <Compile Remove="Controllers\PrivateMessagesController.cs" />
+    <Compile Remove="Controllers\ProductController.cs" />
+    <Compile Remove="Controllers\ProfileController.cs" />
+    <Compile Remove="Controllers\ReturnRequestController.cs" />
+    <Compile Remove="Controllers\ShoppingCartController.cs" />
+    <Compile Remove="Controllers\TopicController.cs" />
+    <Compile Remove="Controllers\VendorController.cs" />
+    <Compile Remove="Extensions\AttributeParserHelper.cs" />
+    <Compile Remove="Factories\AddressModelFactory.cs" />
+    <Compile Remove="Factories\BlogModelFactory.cs" />
+    <Compile Remove="Factories\CatalogModelFactory.cs" />
+    <Compile Remove="Factories\CheckoutModelFactory.cs" />
+    <Compile Remove="Factories\CountryModelFactory.cs" />
+    <Compile Remove="Factories\ForumModelFactory.cs" />
+    <Compile Remove="Factories\IAddressModelFactory.cs" />
+    <Compile Remove="Factories\IBlogModelFactory.cs" />
+    <Compile Remove="Factories\ICatalogModelFactory.cs" />
+    <Compile Remove="Factories\ICheckoutModelFactory.cs" />
+    <Compile Remove="Factories\ICountryModelFactory.cs" />
+    <Compile Remove="Factories\IForumModelFactory.cs" />
+    <Compile Remove="Factories\IOrderModelFactory.cs" />
+    <Compile Remove="Factories\IPollModelFactory.cs" />
+    <Compile Remove="Factories\IPrivateMessagesModelFactory.cs" />
+    <Compile Remove="Factories\IProductModelFactory.cs" />
+    <Compile Remove="Factories\IProfileModelFactory.cs" />
+    <Compile Remove="Factories\IReturnRequestModelFactory.cs" />
+    <Compile Remove="Factories\IShoppingCartModelFactory.cs" />
+    <Compile Remove="Factories\ITopicModelFactory.cs" />
+    <Compile Remove="Factories\IVendorModelFactory.cs" />
+    <Compile Remove="Factories\OrderModelFactory.cs" />
+    <Compile Remove="Factories\PollModelFactory.cs" />
+    <Compile Remove="Factories\PrivateMessagesModelFactory.cs" />
+    <Compile Remove="Factories\ProductModelFactory.cs" />
+    <Compile Remove="Factories\ProfileModelFactory.cs" />
+    <Compile Remove="Factories\ReturnRequestModelFactory.cs" />
+    <Compile Remove="Factories\ShoppingCartModelFactory.cs" />
+    <Compile Remove="Factories\TopicModelFactory.cs" />
+    <Compile Remove="Factories\VendorModelFactory.cs" />
+    <Compile Remove="Models\Common\AddressAttributeModel.cs" />
+    <Compile Remove="Models\Common\AddressModel.cs" />
+    <Compile Remove="Models\Common\ContactVendorModel.cs" />
+    <Compile Remove="Models\Common\CurrencyModel.cs" />
+    <Compile Remove="Models\Common\CurrencySelectorModel.cs" />
+    <Compile Remove="Models\Common\TaxTypeSelectorModel.cs" />
+    <Compile Remove="Models\Customer\CustomerAddressEditModel.cs" />
+    <Compile Remove="Models\Customer\CustomerAddressListModel.cs" />
+    <Compile Remove="Validators\Common\AddressValidator.cs" />
+    <Compile Remove="Validators\Common\ContactVendorValidator.cs" />
+    <Compile Remove="Validators\Customer\CustomerAddressEditValidator.cs" />
+    <None Remove="App_Data\Localization\defaultResources.nopres.xml" />
+    <None Include="Areas\Admin\Views\Shared\Components\AdminWidget\Default.cshtml" />
+    <None Include="Areas\Admin\Views\Widget\List.cshtml" />
+
+    <None Update="Areas\Admin\sitemap.config">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
+  <!-- This target execute after "Build" target.
+    We use it to clean up folder with plugins from unnecessary and obsolete libraries. -->
+  <Target Name="NopTarget" AfterTargets="Build">
+    <ItemGroup>
+      <!-- Get all the libraries from the shadow copy folder to remove them,
+        because depending on the settings, this may not happen when the application is starting,
+        but this can lead to unpredictable results during debugging of the project. -->
+      <ShadowCopiesLibraries Include="$(MSBuildProjectDirectory)\Plugins\bin\*.*" Exclude="$(MSBuildProjectDirectory)\Plugins\bin\placeholder.txt" />
+    </ItemGroup>
+    <!-- Delete libraries from the shadow copy folder -->
+    <Delete Files="@(ShadowCopiesLibraries)" />
+    <!-- When .NET Core builds a project, it copies all referenced libraries to the output folder.
+      For plugins it creates too many unnecessary files that just take up space.
+      At the moment you can't disable this behavior. That's why we have to manually delete all unnecessary libraries from plugin output directories. -->
+    <MSBuild Projects="$(MSBuildProjectDirectory)\..\..\Build\ClearPluginAssemblies.proj" Targets="NopClear" />
+  </Target>
+
+</Project>

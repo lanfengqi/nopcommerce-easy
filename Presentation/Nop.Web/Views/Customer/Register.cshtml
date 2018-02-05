@@ -1,0 +1,171 @@
+﻿@model RegisterModel
+@using System.Text.Encodings.Web
+@{
+    Layout = "_ColumnsOne";
+
+    //title
+    Html.AddTitleParts(T("PageTitle.Register").Text);
+    //page class
+    Html.AppendPageCssClassParts("html-registration-page");
+}
+
+<div class="page registration-page">
+    <div class="page-title">
+        <h1>@T("Account.Register")</h1>
+    </div>
+    <div class="page-body">
+        <form asp-route="Register" asp-route-returnurl="@Context.Request.Query["ReturnUrl"]" method="post">
+            <div asp-validation-summary="ModelOnly" class="message-error"></div>
+            <div class="fieldset">
+                <div class="title">
+                    <strong>@T("Account.YourPersonalDetails")</strong>
+                </div>
+                <div class="form-fields">
+                   
+                    <div class="inputs">
+                        <label asp-for="FirstName" asp-postfix=":"></label>
+                        <input asp-for="FirstName" />
+                        <nop-required />
+                        <span asp-validation-for="FirstName"></span>
+                    </div>
+                    <div class="inputs">
+                        <label asp-for="LastName" asp-postfix=":"></label>
+                        <input asp-for="LastName" />
+                        <nop-required />
+                        <span asp-validation-for="LastName"></span>
+                    </div>
+                    
+                    <div class="inputs">
+                        <label asp-for="Email" asp-postfix=":"></label>
+                        <input asp-for="Email" />
+                        <nop-required />
+                        <span asp-validation-for="Email"></span>
+                    </div>
+                    @if (Model.EnteringEmailTwice)
+                    {
+                        <div class="inputs">
+                            <label asp-for="ConfirmEmail" asp-postfix=":"></label>
+                            <input asp-for="ConfirmEmail" />
+                            <nop-required />
+                            <span asp-validation-for="ConfirmEmail"></span>
+                        </div>
+                    }
+                    @if (Model.UsernamesEnabled)
+                    {
+                        <div class="inputs">
+                            <label asp-for="Username" asp-postfix=":"></label>
+                            <input asp-for="Username" />
+                            <nop-required />
+                            <span asp-validation-for="Username"></span>
+                            @if (Model.CheckUsernameAvailabilityEnabled)
+                            {
+                                @await Html.PartialAsync("_CheckUsernameAvailability")
+                            }
+                        </div>
+
+                    }
+                </div>
+            </div>
+           
+            @if (Model.PhoneEnabled)
+            {
+                <div class="fieldset">
+                    <div class="title">
+                        <strong>@T("Account.YourContactInformation")</strong>
+                    </div>
+                    <div class="form-fields">
+                        @if (Model.PhoneEnabled)
+                        {
+                            <div class="inputs">
+                                <label asp-for="Phone" asp-postfix=":"></label>
+                                <input asp-for="Phone" />
+                                @if (Model.PhoneRequired)
+                                {
+                                    <nop-required />
+                                }
+                                <span asp-validation-for="Phone"></span>
+                            </div>
+                        }
+                       
+                    </div>
+                </div>
+            }
+            @if (Model.NewsletterEnabled || Model.CustomerAttributes.Count > 0)
+            {
+                <div class="fieldset">
+                    <div class="title">
+                        <strong>@T("Account.Options")</strong>
+                    </div>
+                    <div class="form-fields">
+                        @if (Model.NewsletterEnabled)
+                        {
+                            <div class="inputs">
+                                <label asp-for="Newsletter" asp-postfix=":"></label>
+                                <input asp-for="Newsletter" />
+                                <span asp-validation-for="Newsletter"></span>
+                            </div>
+                        }
+                        @if (Model.CustomerAttributes.Count > 0)
+                        {
+                            @await Html.PartialAsync("_CustomerAttributes", Model.CustomerAttributes)
+                        }
+                    </div>
+                </div>
+            }
+            @if (Model.AllowCustomersToSetTimeZone)
+            {
+                <div class="fieldset">
+                    <div class="title">
+                        <strong>@T("Account.Preferences")</strong>
+                    </div>
+                    <div class="form-fields">
+                        @if (Model.AllowCustomersToSetTimeZone)
+                        {
+                            <div class="inputs">
+                                <label asp-for="TimeZoneId" asp-postfix=":"></label>
+                                <select asp-for="TimeZoneId" asp-items="Model.AvailableTimeZones"></select>
+                                <span asp-validation-for="TimeZoneId"></span>
+                            </div>
+                        }
+                    </div>
+                </div>
+            }
+            <div class="fieldset">
+                <div class="title">
+                    <strong>@T("Account.YourPassword")</strong>
+                </div>
+                <div class="form-fields">
+                    <div class="inputs">
+                        <label asp-for="Password" asp-postfix=":"></label>
+                        <input asp-for="Password" />
+                        <nop-required />
+                        <span asp-validation-for="Password"></span>
+                    </div>
+                    <div class="inputs">
+                        <label asp-for="ConfirmPassword" asp-postfix=":"></label>
+                        <input asp-for="ConfirmPassword" />
+                        <nop-required />
+                        <span asp-validation-for="ConfirmPassword"></span>
+                    </div>
+                    @if (Model.DisplayCaptcha)
+                    {
+                        <div class="captcha-box">
+                            <nop-captcha />
+                        </div>
+                    }
+                    @if (Model.HoneypotEnabled)
+                    {
+                        @Html.Raw(Html.GenerateHoneypotInput())
+                    }
+                </div>
+               
+            </div>
+            <div class="buttons">
+                <input type="submit" id="register-button" class="button-1 register-next-step-button" value="@T("Account.Register.Button")" name="register-button" />
+            </div>
+        </form>
+        <div class="external-authentication">
+            @await Component.InvokeAsync("ExternalMethods", "ExternalAuthentication")
+        </div>
+    </div>
+</div>

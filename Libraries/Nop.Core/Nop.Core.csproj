@@ -1,0 +1,135 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net461</TargetFramework> 
+    <Copyright>Copyright © Nop Solutions, Ltd</Copyright> 
+    <Company>Nop Solutions, Ltd</Company> 
+    <Authors>Nop Solutions, Ltd</Authors> 
+    <Version>4.0.0.0</Version> 
+    <Description>The Nop.Core project contains a set of core classes for nopCommerce, such as caching, events, helpers, and business objects (for example, Order and Customer entities).</Description> 
+    <PackageLicenseUrl>http://www.nopcommerce.com/licensev3.aspx</PackageLicenseUrl> 
+    <PackageProjectUrl>http://www.nopcommerce.com/</PackageProjectUrl> 
+    <RepositoryUrl>https://github.com/nopSolutions/nopCommerce</RepositoryUrl> 
+    <RepositoryType>Git</RepositoryType>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="Domain\Affiliates\**" />
+    <Compile Remove="Domain\Blogs\**" />
+    <Compile Remove="Domain\Common\**" />
+    <Compile Remove="Domain\Directory\**" />
+    <Compile Remove="Domain\Discounts\**" />
+    <Compile Remove="Domain\Forums\**" />
+    <Compile Remove="Domain\Orders\**" />
+    <Compile Remove="Domain\Payments\**" />
+    <Compile Remove="Domain\Polls\**" />
+    <Compile Remove="Domain\Shipping\**" />
+    <Compile Remove="Domain\Tax\**" />
+    <Compile Remove="Domain\Topics\**" />
+    <Compile Remove="Domain\Topics\Affiliates\**" />
+    <Compile Remove="Domain\Topics\Blogs\**" />
+    <Compile Remove="Domain\Topics\Cms\**" />
+    <Compile Remove="Domain\Topics\Directory\**" />
+    <Compile Remove="Domain\Topics\Discounts\**" />
+    <Compile Remove="Domain\Topics\Forums\**" />
+    <Compile Remove="Domain\Topics\Orders\**" />
+    <Compile Remove="Domain\Topics\Payments\**" />
+    <Compile Remove="Domain\Topics\Polls\**" />
+    <Compile Remove="Domain\Topics\Shipping\**" />
+    <Compile Remove="Domain\Topics\Tax\**" />
+    <Compile Remove="Domain\Vendors\**" />
+    <EmbeddedResource Remove="Domain\Affiliates\**" />
+    <EmbeddedResource Remove="Domain\Blogs\**" />
+    <EmbeddedResource Remove="Domain\Common\**" />
+    <EmbeddedResource Remove="Domain\Directory\**" />
+    <EmbeddedResource Remove="Domain\Discounts\**" />
+    <EmbeddedResource Remove="Domain\Forums\**" />
+    <EmbeddedResource Remove="Domain\Orders\**" />
+    <EmbeddedResource Remove="Domain\Payments\**" />
+    <EmbeddedResource Remove="Domain\Polls\**" />
+    <EmbeddedResource Remove="Domain\Shipping\**" />
+    <EmbeddedResource Remove="Domain\Tax\**" />
+    <EmbeddedResource Remove="Domain\Topics\**" />
+    <EmbeddedResource Remove="Domain\Topics\Affiliates\**" />
+    <EmbeddedResource Remove="Domain\Topics\Blogs\**" />
+    <EmbeddedResource Remove="Domain\Topics\Cms\**" />
+    <EmbeddedResource Remove="Domain\Topics\Directory\**" />
+    <EmbeddedResource Remove="Domain\Topics\Discounts\**" />
+    <EmbeddedResource Remove="Domain\Topics\Forums\**" />
+    <EmbeddedResource Remove="Domain\Topics\Orders\**" />
+    <EmbeddedResource Remove="Domain\Topics\Payments\**" />
+    <EmbeddedResource Remove="Domain\Topics\Polls\**" />
+    <EmbeddedResource Remove="Domain\Topics\Shipping\**" />
+    <EmbeddedResource Remove="Domain\Topics\Tax\**" />
+    <EmbeddedResource Remove="Domain\Vendors\**" />
+    <None Remove="Domain\Affiliates\**" />
+    <None Remove="Domain\Blogs\**" />
+    <None Remove="Domain\Common\**" />
+    <None Remove="Domain\Directory\**" />
+    <None Remove="Domain\Discounts\**" />
+    <None Remove="Domain\Forums\**" />
+    <None Remove="Domain\Orders\**" />
+    <None Remove="Domain\Payments\**" />
+    <None Remove="Domain\Polls\**" />
+    <None Remove="Domain\Shipping\**" />
+    <None Remove="Domain\Tax\**" />
+    <None Remove="Domain\Topics\**" />
+    <None Remove="Domain\Topics\Affiliates\**" />
+    <None Remove="Domain\Topics\Blogs\**" />
+    <None Remove="Domain\Topics\Cms\**" />
+    <None Remove="Domain\Topics\Directory\**" />
+    <None Remove="Domain\Topics\Discounts\**" />
+    <None Remove="Domain\Topics\Forums\**" />
+    <None Remove="Domain\Topics\Orders\**" />
+    <None Remove="Domain\Topics\Payments\**" />
+    <None Remove="Domain\Topics\Polls\**" />
+    <None Remove="Domain\Topics\Shipping\**" />
+    <None Remove="Domain\Topics\Tax\**" />
+    <None Remove="Domain\Vendors\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Remove="Domain\Customers\RewardPointsActivatingDelayPeriod.cs" />
+    <Compile Remove="Domain\Customers\RewardPointsHistory.cs" />
+    <Compile Remove="Domain\Customers\RewardPointsSettings.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Include="Domain\Common\AttributeControlType.cs" />
+    <Compile Include="Domain\Common\AdminAreaSettings.cs" />
+    <Compile Include="Domain\Common\CommonSettings.cs" />
+    <Compile Include="Domain\Common\GenericAttribute.cs" />
+    <Compile Include="Domain\Common\PdfSettings.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Autofac" Version="4.6.2" />
+    <PackageReference Include="Autofac.Extensions.DependencyInjection" Version="4.2.0" />
+    <PackageReference Include="AutoMapper" Version="6.1.1" />
+    <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="3.1.0" />
+    <PackageReference Include="Microsoft.AspNetCore" Version="2.0.0" />
+    <PackageReference Include="Microsoft.AspNetCore.Authentication" Version="2.0.0" />
+    <PackageReference Include="Microsoft.AspNetCore.Authentication.Cookies" Version="2.0.0" />
+    <PackageReference Include="Microsoft.AspNetCore.Authentication.OAuth" Version="2.0.0" />
+    <PackageReference Include="Microsoft.AspNetCore.DataProtection.Redis" Version="0.3.0" />
+    <PackageReference Include="Microsoft.AspNetCore.Diagnostics" Version="2.0.0" />
+    <PackageReference Include="Microsoft.AspNetCore.Hosting.Abstractions" Version="2.0.0" />
+    <PackageReference Include="Microsoft.AspNetCore.Http" Version="2.0.0" />
+    <PackageReference Include="Microsoft.AspNetCore.Mvc" Version="2.0.0" />
+    <PackageReference Include="Microsoft.AspNetCore.ResponseCompression" Version="2.0.0" />
+    <PackageReference Include="Microsoft.AspNetCore.Routing" Version="2.0.0" />
+    <PackageReference Include="Microsoft.AspNetCore.Session" Version="2.0.0" />
+    <PackageReference Include="Microsoft.AspNetCore.StaticFiles" Version="2.0.0" />
+    <PackageReference Include="Microsoft.Extensions.Caching.Memory" Version="2.0.0" />
+    <PackageReference Include="Microsoft.Extensions.Configuration" Version="2.0.0" />
+    <PackageReference Include="Microsoft.Extensions.Configuration.Binder" Version="2.0.0" />
+    <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="2.0.0" />
+    <PackageReference Include="Microsoft.Extensions.Primitives" Version="2.0.0" />
+    <PackageReference Include="MiniProfiler.AspNetCore.Mvc" Version="4.0.0-alpha7-142" />
+    <PackageReference Include="Newtonsoft.Json" Version="10.0.3" />
+    <PackageReference Include="RedLock.net.StrongName" Version="1.7.5" />
+    <PackageReference Include="StackExchange.Redis.StrongName" Version="1.2.6" />
+    <PackageReference Include="System.IO.Compression" Version="4.3.0" />
+  </ItemGroup>
+
+</Project>

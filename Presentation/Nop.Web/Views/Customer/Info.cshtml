@@ -1,0 +1,253 @@
+﻿@using Nop.Core
+@model CustomerInfoModel
+@{
+    Layout = "_ColumnsTwo";
+
+    //title
+    Html.AddTitleParts(T("PageTitle.Account").Text);
+    //page class
+    Html.AppendPageCssClassParts("html-account-page");
+    Html.AppendPageCssClassParts("html-customer-info-page");
+}
+
+@section left
+{
+    @await Component.InvokeAsync("CustomerNavigation", new { selectedTabId = CustomerNavigationEnum.Info })
+}
+
+
+<div class="page account-page customer-info-page">
+    <div class="page-title">
+        <h1>@T("Account.MyAccount") - @T("Account.CustomerInfo")</h1>
+    </div>
+    <div class="page-body">
+        <form asp-route="CustomerInfo" method="post">
+            <div asp-validation-summary="ModelOnly" class="message-error"></div>
+            <div class="fieldset">
+                <div class="title">
+                    <strong>@T("Account.YourPersonalDetails")</strong>
+                </div>
+                <div class="form-fields">
+                   
+                    <div class="inputs">
+                        <label asp-for="FirstName" asp-postfix=":"></label>
+                        <input asp-for="FirstName" />
+                        <nop-required/>
+                        <span asp-validation-for="FirstName"></span>
+                    </div>
+                    <div class="inputs">
+                        <label asp-for="LastName" asp-postfix=":"></label>
+                        <input asp-for="LastName" />
+                        <nop-required />
+                        <span asp-validation-for="LastName"></span>
+                    </div>
+                   
+                    <div class="inputs">
+                        <label asp-for="Email" asp-postfix=":"></label>
+                        <input asp-for="Email" />
+                        <nop-required />
+                        <span asp-validation-for="Email"></span>
+                    </div>
+                    @if (!string.IsNullOrEmpty(Model.EmailToRevalidate))
+                    {
+                        <div class="inputs">
+                            <label asp-for="EmailToRevalidate"></label>
+                            <span class="email-to-revalidate">@Model.EmailToRevalidate</span>
+                            <span class="email-to-revalidate-note">
+                                <em>@T("Account.Fields.EmailToRevalidate.Note")</em>
+                            </span>
+                        </div>
+                    }
+                    @if (Model.UsernamesEnabled)
+                    {
+                        if (Model.AllowUsersToChangeUsernames)
+                        {
+                            <div class="inputs">
+                                <label asp-for="Username" asp-postfix=":"></label>
+                                <input asp-for="Username" />
+                                <nop-required />
+                                <span asp-validation-for="Username"></span>
+                                @if (Model.CheckUsernameAvailabilityEnabled)
+                                {
+                                    @await Html.PartialAsync("_CheckUsernameAvailability")
+                                }
+                            </div>
+                        }
+                        else
+                        {
+                            <div class="inputs">
+                                <label asp-for="Username" asp-postfix=":"></label>
+                                <span class="readonly-username">@Model.Username</span>
+                            </div>
+                        }
+                    }
+                </div>
+            </div>
+           
+            @if (Model.PhoneEnabled)
+            {
+                <div class="fieldset">
+                    <div class="title">
+                        <strong>@T("Account.YourContactInformation")</strong>
+                    </div>
+                    <div class="form-fields">
+                        @if (Model.PhoneEnabled)
+                        {
+                            <div class="inputs">
+                                <label asp-for="Phone" asp-postfix=":"></label>
+                                <input asp-for="Phone" />
+                                @if (Model.PhoneRequired)
+                                {
+                                    <nop-required />
+                                }
+                                <span asp-validation-for="Phone"></span>
+                            </div>
+                        }
+                       
+                    </div>
+                </div>
+            }
+            @if (Model.NewsletterEnabled || Model.CustomerAttributes.Count > 0)
+            {
+                <div class="fieldset">
+                    <div class="title">
+                        <strong>@T("Account.Options")</strong>
+                    </div>
+                    <div class="form-fields">
+                        @if (Model.NewsletterEnabled)
+                        {
+                            <div class="inputs">
+                                <label asp-for="Newsletter" asp-postfix=":"></label>
+                                <input asp-for="Newsletter" />
+                                <span asp-validation-for="Newsletter"></span>
+                            </div>
+                        }
+                        @if (Model.CustomerAttributes.Count > 0)
+                        {
+                            @await Html.PartialAsync("_CustomerAttributes", Model.CustomerAttributes)
+                        }
+                    </div>
+                </div>
+            }
+            @if (Model.AllowCustomersToSetTimeZone)
+            {
+                <div class="fieldset">
+                    <div class="title">
+                        <strong>@T("Account.Preferences")</strong>
+                    </div>
+                    <div class="form-fields">
+                        @if (Model.AllowCustomersToSetTimeZone)
+                        {
+                            <div class="inputs">
+                                <label asp-for="TimeZoneId" asp-postfix=":"></label>
+                                <select asp-for="TimeZoneId" asp-items="Model.AvailableTimeZones"></select>
+                                <span asp-validation-for="TimeZoneId"></span>
+                            </div>
+                        }
+                        
+                    </div>
+                </div>
+            }
+            @if (Model.NumberOfExternalAuthenticationProviders > 0)
+            {
+                <div class="fieldset">
+                    <div class="title">
+                        <strong>@T("Account.AssociatedExternalAuth")</strong>
+                    </div>
+                    @if (Model.AssociatedExternalAuthRecords.Count > 0)
+                    {
+                        //existing associated external records
+                        <div class="table-wrapper">
+                            <table class="data-table">
+                                <colgroup>
+                                    <col />
+                                    <col />
+                                    <col />
+                                </colgroup>
+                                <thead>
+                                    <tr>
+                                        <th class="auth-method-name">
+                                            @T("Account.AssociatedExternalAuth.AuthMethodName")
+                                        </th>
+                                        <th class="email">
+                                            @T("Account.AssociatedExternalAuth.Email")
+                                        </th>
+                                        <th class="external-id">
+                                            @T("Account.AssociatedExternalAuth.ExternalIdentifier")
+                                        </th>
+                                        @if (Model.AllowCustomersToRemoveAssociations)
+                                        {
+                                            <th class="remove">
+                                                @T("Account.AssociatedExternalAuth.Remove")
+                                            </th>
+                                        }
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach (var item in Model.AssociatedExternalAuthRecords)
+                                    {
+                                        <tr>
+                                            <td class="auth-method-name">
+                                                @item.AuthMethodName
+                                            </td>
+                                            <td class="email">
+                                                @item.Email
+                                            </td>
+                                            <td class="external-id">
+                                                @CommonHelper.EnsureMaximumLength(item.ExternalIdentifier, 40, "...")
+                                            </td>
+                                            @if (Model.AllowCustomersToRemoveAssociations)
+                                            {
+                                                <td class="remove">
+                                                    <a href="#" onclick="return removeexternalassociation(@item.Id)">@T("Account.AssociatedExternalAuth.Remove")</a>
+                                                </td>
+                                            }
+                                        </tr>
+                                    }
+                                </tbody>
+                            </table>
+                        </div>
+                    }
+                    @if (Model.NumberOfExternalAuthenticationProviders > Model.AssociatedExternalAuthRecords.Count)
+                    {
+                        //we can add more external records
+                        <div class="form-fields add-more-external-records">
+                            @T("Account.AssociatedExternalAuth.AddMoreRecords")
+                            <a href="@Url.RouteUrl("Login", null, "http")">
+                                @Url.RouteUrl("Login", null, "http")
+                            </a>
+                        </div>
+                    }
+                </div>
+            }
+            <div class="buttons">
+                <input type="submit" value="@T("Common.Save")" name="save-info-button" class="button-1 save-customer-info-button" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<script type="text/javascript" asp-location="Footer">
+    function removeexternalassociation(itemId) {
+        if (confirm('@T("Common.AreYouSure")')) {
+            var postData = {
+                id: itemId
+            };
+            addAntiForgeryToken(postData);
+            $.ajax({
+                cache: false,
+                type: 'POST',
+                url: '@Url.Action("RemoveExternalAssociation", "Customer")',
+                data: postData,
+                dataType: 'json',
+                success: function (data) {
+                    location.href = data.redirect;
+                },
+                error: function (xhr, ajaxOptions, thrownError) {
+                    alert('Failed to delete');
+                }
+            });
+        }
+        return false;
+    }
+</script>

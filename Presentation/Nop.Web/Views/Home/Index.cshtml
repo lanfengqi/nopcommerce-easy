@@ -1,0 +1,15 @@
+﻿@{
+    Layout = "_ColumnsOne";
+
+    //page class
+    Html.AppendPageCssClassParts("html-home-page");
+}
+<div class="page home-page">
+    <div class="page-body">
+        @await Component.InvokeAsync("Widget", new { widgetZone = "home_page_top" })
+       
+        @await Component.InvokeAsync("Widget", new { widgetZone = "home_page_before_news" })
+        @await Component.InvokeAsync("HomepageNews")
+        @await Component.InvokeAsync("Widget", new { widgetZone = "home_page_bottom" })
+    </div>
+</div>
